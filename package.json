@@ -1,0 +1,26 @@
+{
+  "name": "timestamp-microservice",
+  "version": "1.0.0",
+  "description": "Api Practice Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcodling/timestamp-microservice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tcodling/timestamp-microservice/issues"
+  },
+  "homepage": "https://github.com/tcodling/timestamp-microservice#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongodb": "^4.4.1",
+    "mongoose": "^6.2.8"
+  }
+}
