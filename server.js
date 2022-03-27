@@ -2,24 +2,22 @@
 const express = require("express");
 const app = express();
 
-// Error handler
-app.use(function (err, req, res, next) {
-    if (err) {
-        res
-            .status(err.status || 500)
-            .type("txt")
-            .send(err.message || "SERVER ERROR");
-    }
-});
+const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+const months = ['Jan','Feb','Marh','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-// Unmatched routes handler
-app.use(function (req, res) {
-    if (req.method.toLowerCase() === "options") {
-        res.end();
-    } else {
-        res.status(404).type("txt").send("Not Found");
-    }
-});
+app.get("/api/:date", (req, res) => {
+    let date = new Date(req.params.date)
+    let unixTime = date.getTime()
+    let utcTime = `${days[date.getUTCDay()]}, ${date.getUTCDate()} ${months[date.getUTCMonth()]} ${date.getUTCFullYear()}, ${"00"}:${"00"}:${"00"} GMT`
+    // if (!unixTime) {
+    //     unixTime = req.params.date
+    //     utcTime = new Date(parseInt(req.params.date));
+    // }
+    res.json({
+        unix: unixTime,
+        utc: utcTime
+    })
+})
 
 
 const listener = app.listen(process.env.PORT || 3000, function () {
