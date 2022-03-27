@@ -4,7 +4,8 @@
   "description": "Api Practice Project",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "live": "nodemon server.js"
   },
   "repository": {
     "type": "git",
