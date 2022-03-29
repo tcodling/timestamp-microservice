@@ -7,7 +7,7 @@ const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov
 
 function generateTimeObject(date) {
     let unixTime = date.getTime()
-    let utcTime = `${days[date.getUTCDay()]}, ${date.getUTCDate()} ${months[date.getUTCMonth()]} ${date.getUTCFullYear()} ${"00"}:${"00"}:${"00"} GMT`
+    let utcTime = `${days[date.getUTCDay()]}, ${date.getUTCDate()} ${months[date.getUTCMonth()]} ${date.getUTCFullYear()} ${date.getUTCHours() || "00"}:${date.getUTCMinutes() || "00"}:${date.getUTCSeconds() || "00"} GMT`
     return {
         unix: unixTime,
         utc: utcTime
