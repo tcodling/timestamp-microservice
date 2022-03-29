@@ -1,4 +1,3 @@
-
 const express = require("express");
 const app = express();
 
@@ -19,9 +18,13 @@ if (!process.env.DISABLE_XORIGIN) {
   }
 
 function generateTimeObject(date) {
-    console.log(date)
+    // console.log(date)
     let unixTime = date.getTime()
     let utcTime = `${days[date.getUTCDay()]}, ${date.getUTCDate()} ${months[date.getUTCMonth()]} ${date.getUTCFullYear()} ${date.getUTCHours() || "00"}:${date.getUTCMinutes() || "00"}:${date.getUTCSeconds() || "00"} GMT`
+    console.log({
+        unix: unixTime,
+        utc: utcTime
+    })
     return {
         unix: unixTime,
         utc: utcTime
@@ -29,21 +32,31 @@ function generateTimeObject(date) {
 }
 
 app.get("/api", (req, res) => {
+    console.log("NEW REQUEST /api ==================")
     let date = new Date(Date.now())
+    // console.log(date)
     res.json(generateTimeObject(date))
 })
 
 app.get("/api/:date", (req, res) => {
+    console.log("NEW REQUEST /api/" + req.params.date)
     let date = new Date(req.params.date)
+    let err
     if (!date.getTime()) {
-        date = new Date(parseInt(req.params.date))
+        date = new Date(Number(req.params.date))
         if (!date.getTime()) {
+            err = true
+          console.log("ERROR")
             res.json({
                 error: "Invalid Date"
             })
         }
     }
-    res.json(generateTimeObject(date))
+    
+    if (!err) {
+        console.log("VALID")
+        res.json(generateTimeObject(date))
+    }
 })
 
 
